@@ -1,30 +1,250 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ScamHub</title>
-    <meta name="description" content="Find Scammer">
-    <meta name="author" content="nevapaid" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nevapaid Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
 
-    
-    
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+/* ==== BASE RESET ==== */
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@nevapaid" />
-    <meta name="twitter:image" content="" />
-    <meta property="og:title" content="ScamHub">
-  <meta name="twitter:title" content="ScamHub">
-  <meta property="og:description" content="Find Scammer">
-  <meta name="twitter:description" content="Find Scammer">
-  <link rel="icon" type="image/x-icon" href="https://storage.googleapis.com/gpt-engineer-file-uploads/wEaEaGooHibPdLGG5ZonFKVJE7E3/uploads/1761942396477-6a485465c13c96ac1a5694073a6e167a.jpg">
+html, body {
+  height:100%;
+  width:100%;
+  overflow-x:hidden;
+}
+
+/* ==== GLOBAL COLORS ==== */
+:root {
+  --primary:#5c42ff;
+  --secondary: #0a0f23;
+  --light:#ffffff;
+  --gray:#888;
+}
+
+/* ==== BODY ==== */
+body {
+  background: var(--secondary);
+  color:var(--light);
+  scroll-behavior:smooth;
+}
+
+/* ==== NAVIGATION ==== */
+header {
+  width:100%;
+  padding:20px 0;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:999;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter: blur(6px);
+}
+
+header nav {
+  width:90%;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header nav .logo {
+  font-size:24px;
+  font-weight:700;
+  color:var(--primary);
+  cursor:pointer;
+}
+
+header nav .links a {
+  margin-left:18px;
+  color:var(--light);
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s ease;
+}
+
+header nav .links a:hover {
+  color:var(--primary);
+}
+
+/* ==== HERO SECTION ==== */
+.hero {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background: linear-gradient(to bottom right, #0a0f23, #171d3d);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero h1 {
+  font-size:3rem;
+  animation:fadeIn 1.6s ease-in-out;
+}
+
+.hero p {
+  font-size:1.2rem;
+  margin-top:10px;
+  animation:fadeIn 2.2s ease-in-out;
+}
+
+.hero button {
+  margin-top:18px;
+  padding:12px 26px;
+  font-size:1rem;
+  cursor:pointer;
+  background:var(--primary);
+  border:none;
+  border-radius:6px;
+  color:var(--light);
+  transition:0.3s ease;
+}
+
+.hero button:hover {
+  background:#442edb;
+}
+
+/* Particle canvas */
+#particles-js {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+
+/* ==== SECTIONS ==== */
+.section {
+  padding:80px 0;
+  width:90%;
+  margin:auto;
+}
+
+/* ==== FEATURES ==== */
+.features {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  gap:28px;
+  text-align:center;
+}
+
+.feature-card {
+  padding:24px;
+  background:rgba(255,255,255,0.075);
+  border-radius:12px;
+  transition:0.3s ease;
+}
+
+.feature-card:hover {
+  transform:translateY(-8px);
+  background:rgba(255,255,255,0.12);
+}
+
+.feature-card h3 {
+  margin-top:14px;
+  color:var(--primary);
+}
+
+/* ==== FOOTER ==== */
+footer {
+  text-align:center;
+  padding:24px 0;
+  font-size:0.9rem;
+  color:var(--gray);
+  background:rgba(0,0,0,0.6);
+  margin-top:28px;
+}
+
+/* ==== ANIMATIONS ==== */
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(14px);}
+  to { opacity:1; transform:translateY(0);}
+}
+</style>
 </head>
+<body>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<header>
+  <nav>
+    <div class="logo">Nevapaid</div>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <canvas id="particles-js"></canvas>
+  <div>
+    <h1>Welcome to Nevapaid Project</h1>
+    <p>Smooth animations • Interactive design • Modern layout</p>
+    <button onclick="scrollToFeatures()">Explore More</button>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <h2>About This Project</h2>
+  <p>This is a custom modern landing page design with animations and smooth scrolling.</p>
+</section>
+
+<section id="features" class="section">
+  <h2>Features</h2>
+  <div class="features">
+    <div class="feature-card">
+      <i class="fa-solid fa-meteor fa-2xl"></i>
+      <h3>Fast & Animated</h3>
+      <p>Interactive animations & transitions for every section.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-layer-group fa-2xl"></i>
+      <h3>Responsive Layout</h3>
+      <p>Looks great on phones, tablets, and desktops.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-scroll fa-2xl"></i>
+      <h3>Smooth Scroll</h3>
+      <p>Navigation flows naturally and smoothly.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <p>Made with 💜 by Nevapaid • Contact: <a href="mailto:you@example.com">Email</a></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+function scrollToFeatures() {
+  document.getElementById("features").scrollIntoView({behavior:'smooth'});
+}
+
+/* ==== PARTICLE EFFECT ==== */
+particlesJS("particles-js", {
+  "particles": {
+    "number": {"value":60},
+    "shape": {"type":"circle"},
+    "size": {"value":3},
+    "line_linked": {"enable":true, "distance":130, "color":"#5c42ff", "opacity":0.4}
+  },
+  "interactivity": {
+    "events": {
+      "onhover": {"enable":true, "mode":"repulse"}
+    }
+  }
+});
+</script>
+</body>
 </html>
-
