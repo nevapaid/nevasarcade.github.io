@@ -1,34 +1,52 @@
-<button onclick="toggleShutdown(true)">Shutdown ON</button>
-<button onclick="toggleShutdown(false)">Shutdown OFF</button>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel - Shutdown</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+    <button onclick="setShutdown(true)">Shutdown Site</button>
+    <button onclick="setShutdown(false)">Turn Site On</button>
 
-<script>
-async function toggleShutdown(state) {
-  // This requires a GitHub Personal Access Token to push changes
-  const token = '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'; // <- Keep this secret!
-  const repo = 'nevapaid/nevapaid.github.io';
-  const path = 'shutdown.json';
+    <script>
+        const githubUser = "<YOUR-GITHUB-USERNAME>";
+        const repo = "nevapaid.github.io";
+        const filePath = "shutdown.json";
+        const branch = "main";
+        const token = "<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>"; // keep this private
 
-  // Get current file info
-  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`);
-  const file = await res.json();
+        async function getFileSha() {
+            const res = await fetch(`https://api.github.com/repos/${githubUser}/${repo}/contents/${filePath}`);
+            const data = await res.json();
+            return data.sha;
+        }
 
-  const sha = file.sha;
-  const content = btoa(JSON.stringify({ shutdown: state }));
+        async function setShutdown(value) {
+            const sha = await getFileSha();
+            const body = {
+                message: value ? "Shutdown site" : "Turn site on",
+                content: btoa(JSON.stringify({ shutdown: value }, null, 2)),
+                sha: sha,
+                branch: branch
+            };
 
-  await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${token}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      message: `Set shutdown to ${state}`,
-      content: content,
-      sha: sha
-    })
-  });
+            const res = await fetch(`https://api.github.com/repos/${githubUser}/${repo}/contents/${filePath}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `token ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+            });
 
-  alert('Shutdown state changed!');
-}
-</script>
-
+            const result = await res.json();
+            if (res.ok) {
+                alert("Shutdown updated successfully!");
+            } else {
+                console.error(result);
+                alert("Failed to update shutdown!");
+            }
+        }
+    </script>
+</body>
+</html>
