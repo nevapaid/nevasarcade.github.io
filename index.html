@@ -1,0 +1,15 @@
+<script>
+async function checkShutdown() {
+  try {
+    const response = await fetch('shutdown.json');
+    const data = await response.json();
+    if (data.shutdown) {
+      document.body.innerHTML = '<h1>⚠️ SITE IS SHUTDOWN ⚠️</h1>';
+    }
+  } catch (err) {
+    console.error('Failed to fetch shutdown state', err);
+  }
+}
+
+checkShutdown();
+</script>
